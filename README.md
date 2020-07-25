@@ -1,4 +1,5 @@
-### Monorepo
-to run test run *yarn start* from the root;
-add package to the root – yarn add -W(--ignore-workspace-root-check) [name]
-add package to the package – cd /[package dir] && yarn add [name]
+### Monorepo with TS and express
+#Renaming packages
+1. Change package name 
+2. Chagne the alias in the /tsconfig.ts 
+3. Chagne the name in the dependecies blcok of the package.json

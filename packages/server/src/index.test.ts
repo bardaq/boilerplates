@@ -1,8 +1,7 @@
-const shared = require('@monorepo/shared');
+import { sharedFunc } from '@monorepo/shared';
 
-describe('Client tests', () => {
+describe('Server tests', () => {
     it('Should invoke a func from the shared package', () => {
-        const {sharedFunc} = shared;
         expect(typeof sharedFunc).toBe('function');
     })
 })
