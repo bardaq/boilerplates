@@ -4,6 +4,10 @@
   "main": "index.js",
   "author": "Dmitry Klymenko",
   "license": "MIT",
+  "scripts": {
+    "start": "node ./",
+    "test": "jest"
+  },
   "dependencies": {
     "@monorepo/shared": "^1.0.0"
   }

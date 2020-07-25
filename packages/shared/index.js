@@ -1,3 +1,1 @@
-const sharedFunc = (a, b) => a + b;
-
-module.export = { sharedFunc };
+export const sharedFunc = (a, b) => a + b;
