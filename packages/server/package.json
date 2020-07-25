@@ -1,0 +1,11 @@
+{
+    "name": "@monorepo/server",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "Dmitry Klymenko",
+    "license": "MIT",
+    "dependencies": {
+        "@monorepo/shared": "^1.0.0"
+    }
+  }
+  

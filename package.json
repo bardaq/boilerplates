@@ -1,0 +1,13 @@
+{
+  "name": "monorepo",
+  "version": "1.0.0",
+  "description": "monorepo boilerplate",
+  "main": "index.js",
+  "repository": "https://github.com/bardaq/boilerplates.git",
+  "author": "Dmitry Klymenko",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
