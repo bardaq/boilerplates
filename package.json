@@ -11,17 +11,26 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "jest"
+    "start": "lerna run start --parallel",
+    "start:dev": "lerna run start:dev --stream --parallel",
+    "clean": "lerna run clean",
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run build",
+    "build:dev": "lerna run build:dev",
+    "test": "lerna run test"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
+    "@types/concurrently": "^5.2.1",
     "@types/jest": "^26.0.7",
     "babel-jest": "^26.1.0",
+    "concurrently": "^5.2.0",
     "eslint": "^7.5.0",
     "jest": "^26.1.0",
     "lerna": "^3.22.1",
+    "rimraf": "^3.0.2",
     "typescript": "^3.9.7"
   }
 }

@@ -1,12 +1,13 @@
 {
   "name": "@monorepo/client",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "files": ["dist"],
   "author": "Dmitry Klymenko",
   "license": "MIT",
   "scripts": {
-    "start": "node ./",
-    "test": "jest"
+    "test": "jest",
+    "clean": "rimraf node_modules yarn.lock dist"
   },
   "dependencies": {
     "@monorepo/shared": "^1.0.0"

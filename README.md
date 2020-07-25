@@ -1,5 +1,7 @@
 ### Monorepo with TS and express
+
 #Renaming packages
-1. Change package name 
-2. Chagne the alias in the /tsconfig.ts 
-3. Chagne the name in the dependecies blcok of the package.json
+Don't forget to update the dependency after you have renamed a package;
+
+#Start
+To start in watch mode type ***yarn start:dev***, else you will get all packeges runnign without wathing on changes and without output;

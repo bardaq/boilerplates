@@ -1,13 +1,17 @@
 {
-  "extends": "./tsconfig.build.json",
-
   "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true,
     "baseUrl": ".",
     "paths": {
       "@monorepo/*": ["packages/*/src"]
     },
-    "jsx": "react",
     "esModuleInterop": true,
     "skipLibCheck": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
 }

@@ -1,10 +1,9 @@
 {
-  "extends": "../../tsconfig.build.json",
+  "extends": "../../tsconfig.prod.json",
 
   "compilerOptions": {
     "outDir": "./dist",
-    "jsx": "react",
-    "esModuleInterop": true
+    "esModuleInterop": true,
   },
 
   "include": [
