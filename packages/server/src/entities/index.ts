@@ -1,3 +1,3 @@
 export const entity = {
-    a: 123,
-}
+  a: 123,
+};

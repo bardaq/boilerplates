@@ -1,31 +1,49 @@
 {
-    "name": "@monorepo/server",
-    "version": "1.0.0",
-    "main": "dist/index.js",
-    "author": "Dmitry Klymenko",
-    "license": "MIT",
-    "_moduleAliases": {
-        "@root": "dist/daos",
-        "@entities": "dist/entities"
-    },
-    "scripts": {
-        "build": "rimraf dist && tsc --build tsconfig.prod.json && yarn build:after",
-        "build:dev": "rimraf dist && tsc --build tsconfig.json && yarn build:after",
-        "build:after": "mv dist/server/src/* ./dist/ && rimraf dist/server",
-        "start": "node dist/index.js",
-        "start:dev": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"yarn watch-ts\" \"yarn watch-node\"",
-        "watch-ts": "tsc -w",
-        "watch-test": "yarn test -- --watchAll",
-        "watch-node": "nodemon dist/server.js",
-        "clean": "rimraf node_modules yarn.lock dist"
-    },
-    "dependencies": {
-        "@monorepo/shared": "^1.0.0",
-        "@types/express": "^4.17.7",
-        "express": "^4.17.1"
-    },
-    "devDependencies": {
-        "module-alias": "^2.2.2",
-        "nodemon": "^2.0.4"
-    }
+  "name": "@monorepo/server",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "author": "Dmitry Klymenko",
+  "license": "MIT",
+  "_moduleAliases": {
+    "@root": "dist/daos",
+    "@entities": "dist/entities",
+    "@common": "dist/common"
+  },
+  "scripts": {
+    "build": "rimraf dist && tsc --build tsconfig.prod.json && yarn build:after",
+    "build:dev": "rimraf dist && tsc --build tsconfig.json && yarn build:after",
+    "build:after": "mv dist/server/src/* ./dist/ && rimraf dist/server",
+    "start": "node dist/index.js",
+    "start:dev": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"yarn watch-ts\" \"yarn watch-node\"",
+    "watch-ts": "tsc -w",
+    "test": "yarn jest",
+    "watch-test": "yarn jest -- --watchAll",
+    "watch-node": "nodemon dist/server.js",
+    "clean": "rimraf node_modules yarn.lock dist"
+  },
+  "dependencies": {
+    "@monorepo/shared": "^1.0.0",
+    "command-line-args": "^5.1.1",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.23.3",
+    "morgan": "^1.10.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/command-line-args": "^5.0.0",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/express": "^4.17.7",
+    "@types/helmet": "^0.0.47",
+    "@types/morgan": "^1.9.1",
+    "module-alias": "^2.2.2",
+    "nodemon": "^2.0.4"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-typescript"
+    ]
+  }
 }

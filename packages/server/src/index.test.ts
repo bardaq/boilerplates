@@ -1,11 +1,13 @@
 import { sharedFunc } from "@monorepo/shared";
-import { entity } from "@entities";
+import { entity } from "entities";
+import logger from "common/logger";
 
-describe("Server tests", () => {
-  it("Should invoke a func from the shared package", () => {
+describe("Server infrastructure tests", () => {
+  it("Accces to the @monorepo/shared", () => {
     expect(typeof sharedFunc).toBe("function");
   });
-  it("Should display an obj imported by alias", () => {
+  it("Resolve path from the './src/*' ", () => {
     expect(entity).not.toBe(undefined);
+    expect(logger).not.toBe(undefined);
   });
 });

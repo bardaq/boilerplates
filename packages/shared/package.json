@@ -1,18 +1,28 @@
 {
-    "name": "@monorepo/shared",
-    "version": "1.0.0",
-    "main": "dist/index.js",
-    "author": "Dmitry Klymenko",
-    "license": "MIT",
-    "scripts": {
-      "build": "rimraf dist && tsc --build tsconfig.prod.json",
-      "build:dev": "rimraf dist && tsc --build tsconfig.json",
-      "start": "node ./dist/index.js",
-      "start:dev": "yarn watch-ts",
-      "watch-ts": "tsc -w",
-      "watch-test": "yarn test -- --watchAll",
-      "clean": "rimraf node_modules yarn.lock dist",
-      "test": "yarn jest --colors"
-    }
+  "name": "@monorepo/shared",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "author": "Dmitry Klymenko",
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf dist && tsc --build tsconfig.prod.json",
+    "build:dev": "rimraf dist && tsc --build tsconfig.json",
+    "start": "node ./dist/index.js",
+    "start:dev": "yarn watch-ts",
+    "watch-ts": "tsc -w",
+    "watch-test": "yarn test -- --watchAll",
+    "clean": "rimraf node_modules yarn.lock dist",
+    "test": "yarn jest --colors"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "current"
+        }
+      },
+      "@babel/preset-typescript"
+    ]
   }
-  
+}

@@ -1,1 +1,2 @@
-export const sharedFunc = (a: number | string, b: number | string) => Number(a) + Number(b) + 1;
+export const sharedFunc = (a: number | string, b: number | string): number =>
+  Number(a) + Number(b);
