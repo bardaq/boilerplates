@@ -13,8 +13,8 @@
   "scripts": {
     "start": "lerna run start --parallel",
     "start:dev": "lerna run start:dev --stream --parallel",
-    "clean": "lerna run clean",
-    "bootstrap": "lerna bootstrap",
+    "clean": "lerna run clean && rimraf node_modules yarn.lock",
+    "bootstrap": "lerna bootstrap && yarn build:dev",
     "build": "lerna run build",
     "build:dev": "lerna run build:dev",
     "test": "lerna run test"

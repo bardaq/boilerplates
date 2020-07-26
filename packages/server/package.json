@@ -4,6 +4,10 @@
     "main": "dist/index.js",
     "author": "Dmitry Klymenko",
     "license": "MIT",
+    "_moduleAliases": {
+        "@root": "dist/daos",
+        "@entities": "dist/entities"
+    },
     "scripts": {
         "build": "rimraf dist && tsc --build tsconfig.prod.json && yarn build:after",
         "build:dev": "rimraf dist && tsc --build tsconfig.json && yarn build:after",
@@ -21,6 +25,7 @@
         "express": "^4.17.1"
     },
     "devDependencies": {
+        "module-alias": "^2.2.2",
         "nodemon": "^2.0.4"
     }
 }

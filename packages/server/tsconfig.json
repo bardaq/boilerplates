@@ -7,12 +7,18 @@
     "importHelpers": true,
     "module": "commonjs",
     "outDir": "dist",
+    "baseUrl": ".",
     "removeComments": true,
     "sourceMap": true,
     "strict": true,
     "target": "es6",
     "moduleResolution": "node",
     "types": ["node", "jest"],
+    "paths": {
+      "@monorepo/*": ["../*/src"],
+      "@entities": ["src/entities"],
+      "@entities/*": ["src/entities/*"]
+    }
   },
   "include": [
     "src/**/*.ts",
