@@ -1,12 +1,10 @@
 {
-  "extends": "./tsconfig.prod.json",
+  "extends": "./tsconfig.json",
 
   "compilerOptions": {
     "outDir": "./dist",
     "esModuleInterop": true
   },
 
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"]
 }
