@@ -9,7 +9,10 @@
     "outDir": "dist",
     "baseUrl": "src",
     "paths": {
-      "@monorepo/*": ["../../*/src"]
+      "@monorepo/*": ["../../*/src"],
+      "@root/*": ["./*"],
+      "@entities/*": ["./entities/*"],
+      "@common/*": ["./common/*"]
     },
     "removeComments": true,
     "sourceMap": true,

@@ -1,31 +1,26 @@
 export const mock = [
   {
-    id: "0",
-    login: "testLogin0",
+    id: "0000000000001",
     phone: "124456789",
     email: "test0@email.com",
   },
   {
-    id: "1",
-    login: "testLogin1",
+    id: "1000000000000",
     phone: "123456789",
     email: "test1@email.com",
   },
   {
-    id: "2",
-    login: "testLogin2",
+    id: "2000000000000",
     phone: "223456789",
     email: "test2@email.com",
   },
   {
-    id: "3",
-    login: "testLogin3",
+    id: "3000000000000",
     phone: "333456789",
     email: "test3@email.com",
   },
   {
-    id: "4",
-    login: "testLogin4",
+    id: "4000000000000",
     phone: "444456789",
     email: "test4@email.com",
   },

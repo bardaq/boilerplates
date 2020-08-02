@@ -16,15 +16,15 @@ export const getById = async (req: Request, res: Response) => {
 };
 
 export const create = async (req: Request, res: Response) => {
-  const { login, phone, email } = req.body;
-  const newUser = new User(login, phone, email);
+  const { phone, email } = req.body;
+  const newUser = new User(phone, email);
   const id = await userDao.add(newUser);
   return res.json({ id });
 };
 
 export const update = async (req: Request, res: Response) => {
-  const { login, phone, email, id } = req.body;
-  const user = new User(id, login, phone, email);
+  const { phone, email, id } = req.body;
+  const user = new User(id, phone, email);
   const updatedUser = await userDao.add(user);
   return res.json({ user: updatedUser });
 };
