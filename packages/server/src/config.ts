@@ -1,5 +1,12 @@
+import moduleAlias from "module-alias";
 import dotenv from "dotenv";
 import commandLineArgs from "command-line-args";
+
+moduleAlias.addAliases({
+  "@": __dirname,
+});
+
+moduleAlias();
 
 const options = commandLineArgs([
   {

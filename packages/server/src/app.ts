@@ -1,5 +1,3 @@
-import "./config";
-
 import expess from "express";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
@@ -24,8 +22,6 @@ app.get("/", (req, res) => {
   const something = sharedFunc(1, 2);
   res.send("Hello World! " + something);
 });
-
-logger.info("test");
 
 const server = app;
 

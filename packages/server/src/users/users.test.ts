@@ -1,3 +1,4 @@
+import "../config";
 import request, { Response } from "supertest";
 
 import server from "@/app";
