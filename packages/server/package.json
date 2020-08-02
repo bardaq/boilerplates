@@ -5,9 +5,7 @@
   "author": "Dmitry Klymenko",
   "license": "MIT",
   "_moduleAliases": {
-    "@root": "dist/",
-    "@entities": "dist/entities",
-    "@common": "dist/common"
+    "@": "dist"
   },
   "scripts": {
     "build": "rimraf dist && tsc --build tsconfig.prod.json && yarn build:after",
@@ -52,6 +50,17 @@
         }
       ],
       "@babel/preset-typescript"
+    ]
+  },
+  "jest": {
+    "modulePaths": [
+      "<rootDir>/src/"
+    ],
+    "moduleNameMapper": {
+      "@/(.*)$": "<rootDir>/src/$1"
+    },
+    "testMatch": [
+      "**/?(*.)+(spec|test).ts"
     ]
   }
 }

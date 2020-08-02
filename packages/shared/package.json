@@ -26,5 +26,16 @@
       ],
       "@babel/preset-typescript"
     ]
+  },
+  "jest": {
+    "modulePaths": [
+      "<rootDir>/src/"
+    ],
+    "moduleNameMapper": {
+      "@/(.*)$": "<rootDir>/src/$1"
+    },
+    "testMatch": [
+      "**/?(*.)+(spec|test).ts"
+    ]
   }
 }

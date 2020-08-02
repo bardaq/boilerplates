@@ -4,7 +4,7 @@ import expess from "express";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
-import logger from "common/logger";
+import logger from "@/common/logger";
 
 import { sharedFunc } from "@monorepo/shared";
 

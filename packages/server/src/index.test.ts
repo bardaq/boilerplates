@@ -1,5 +1,5 @@
 import { sharedFunc } from "@monorepo/shared";
-import { entity } from "entities";
+import { handleValidationErrorsMiddlware } from "@/common/validation";
 import logger from "common/logger";
 
 describe("Server infrastructure tests", () => {
@@ -7,7 +7,9 @@ describe("Server infrastructure tests", () => {
     expect(typeof sharedFunc).toBe("function");
   });
   it("Resolve path from the './src/*' ", () => {
-    expect(entity).not.toBe(undefined);
     expect(logger).not.toBe(undefined);
+  });
+  it("Resolve path from the root alias @", () => {
+    expect(handleValidationErrorsMiddlware).not.toBe(undefined);
   });
 });
