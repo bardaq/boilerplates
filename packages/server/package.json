@@ -33,17 +33,18 @@
     "@types/helmet": "^0.0.47",
     "@types/module-alias": "^2.0.0",
     "@types/morgan": "^1.9.1",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.2"
   },
   "nodemonConfig": {
     "watch": [
-      "dist/**/*.ts"
+      "src"
     ],
     "ext": "ts",
     "ignore": [
       "**/*.test.ts"
     ],
-    "exec": "tsc --build tsconfig.json && node dist/index.js"
+    "exec": "ts-node ./src/index.ts"
   },
   "babel": {
     "presets": [
