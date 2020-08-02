@@ -6,8 +6,8 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "module": "commonjs",
-    "outDir": "dist",
-    "baseUrl": "src",
+    "outDir": "./dist",
+    "baseUrl": "./src",
     "paths": {
       "@monorepo/*": ["../../*/src"],
       "@/*": ["./*"]
@@ -19,6 +19,5 @@
     "moduleResolution": "node",
     "types": ["node", "jest"]
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["src/public/", "node_modules"]
+  "include": ["src/**/*"]
 }

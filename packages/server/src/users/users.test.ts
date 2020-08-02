@@ -18,7 +18,6 @@ describe("User routes", () => {
         .expect("Content-Type", /json/)
         .end((err: Error, res: Response) => {
           logger.error(err);
-          logger.info(res);
           const returnedUser = res.body.users.map((u: IUser) => new User(u));
           expect(res.body.error).toBeUndefined();
           expect(returnedUser).toEqual(mock);

@@ -5,15 +5,13 @@
   "author": "Dmitry Klymenko",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf dist && tsc --build tsconfig.prod.json && yarn build:after",
-    "build:dev": "rimraf dist && tsc --build tsconfig.json && yarn build:after",
-    "build:after": "mv dist/server/src/* ./dist/ && rimraf dist/server",
+    "build": "rimraf dist && tsc --build tsconfig.prod.json",
+    "build:dev": "rimraf dist && tsc --build tsconfig.json",
     "start": "node dist/index.js",
-    "start:dev": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"yarn watch-ts\" \"yarn watch-node\"",
+    "start:dev": "nodemon",
     "watch-ts": "tsc -w",
     "test": "yarn jest",
     "watch-test": "yarn jest -- --watchAll",
-    "watch-node": "nodemon dist/server.js",
     "clean": "rimraf node_modules yarn.lock dist"
   },
   "dependencies": {
@@ -36,6 +34,16 @@
     "@types/module-alias": "^2.0.0",
     "@types/morgan": "^1.9.1",
     "nodemon": "^2.0.4"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "dist/**/*.ts"
+    ],
+    "ext": "ts",
+    "ignore": [
+      "**/*.test.ts"
+    ],
+    "exec": "tsc --build tsconfig.json && node dist/index.js"
   },
   "babel": {
     "presets": [

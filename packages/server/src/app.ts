@@ -2,9 +2,8 @@ import expess from "express";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
-import logger from "@/common/logger";
-
-import { sharedFunc } from "@monorepo/shared";
+import usersRouter from "./users";
+import logger from "./common/logger";
 
 const app = expess();
 
@@ -18,11 +17,11 @@ if (process.env.NODE_ENV === "development") {
   app.use(helmet());
 }
 
-app.get("/", (req, res) => {
-  const something = sharedFunc(1, 2);
-  res.send("Hello World! " + something);
+app.use("/users", usersRouter);
+
+app.get("/status", (req, res) => {
+  logger.info("usersRouter");
+  res.json({ status: "OK" });
 });
 
-const server = app;
-
-export default server;
+export default app;

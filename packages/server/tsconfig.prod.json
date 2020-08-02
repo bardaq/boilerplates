@@ -2,11 +2,8 @@
   "extends": "./tsconfig.json",
 
   "compilerOptions": {
-    "outDir": "./dist",
-    "esModuleInterop": true,
     "sourceMap": false
   },
 
-  "include": ["src/**/*"],
   "exclude": ["**/*.test.ts"]
 }

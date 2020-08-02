@@ -7,36 +7,38 @@ import {
   validateBodyPhone,
   validateParamId,
 } from "./users.validation";
-import { handleValidationErrorsMiddlware } from "common/validation";
+import { handleValidationErrorsMiddlware } from "@/common/validation";
 
-const router = Router();
+const usersRouter = Router();
 
-router.post(
+usersRouter.post(
   "/",
   [validateBodyId, validateBodyEmail, validateBodyPhone],
   handleValidationErrorsMiddlware,
   userController.create
 );
 
-router.get("/", userController.getAll);
+usersRouter.get("/", userController.getAll);
 
-router.get(
+usersRouter.get(
   "/:id",
   [validateParamId],
   handleValidationErrorsMiddlware,
   userController.getById
 );
 
-router.patch(
+usersRouter.patch(
   "/",
   [validateBodyId, validateBodyEmail, validateBodyPhone],
   handleValidationErrorsMiddlware,
   userController.update
 );
 
-router.delete(
+usersRouter.delete(
   "/:id",
   [validateParamId],
   handleValidationErrorsMiddlware,
   userController.remove
 );
+
+export default usersRouter;
