@@ -21,7 +21,7 @@ class UserDao implements IUserDao {
   public async add(user: IUser): Promise<string> {
     user;
     // TODO: add in DB and return an ID of the new obj
-    return "123412341234";
+    return "1234123412341223";
   }
 
   public async update(user: IUser): Promise<IUser> {

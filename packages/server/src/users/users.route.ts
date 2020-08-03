@@ -6,6 +6,8 @@ import {
   validateBodyEmail,
   validateBodyPhone,
   validateParamId,
+  validateBodyEmailOptional,
+  validateBodyPhoneOptional,
 } from "./users.validation";
 import { handleValidationErrorsMiddlware } from "@/common/validation";
 
@@ -13,7 +15,7 @@ const usersRouter = Router();
 
 usersRouter.post(
   "/",
-  [validateBodyId, validateBodyEmail, validateBodyPhone],
+  [validateBodyEmail, validateBodyPhone],
   handleValidationErrorsMiddlware,
   userController.create
 );
@@ -29,7 +31,7 @@ usersRouter.get(
 
 usersRouter.patch(
   "/",
-  [validateBodyId, validateBodyEmail, validateBodyPhone],
+  [validateBodyId, validateBodyEmailOptional, validateBodyPhoneOptional],
   handleValidationErrorsMiddlware,
   userController.update
 );

@@ -1,9 +1,8 @@
-import expess from "express";
+import expess, { Router } from "express";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import usersRouter from "./users";
-import logger from "./common/logger";
 
 const app = expess();
 
@@ -17,10 +16,15 @@ if (process.env.NODE_ENV === "development") {
   app.use(helmet());
 }
 
-app.use("/users", usersRouter);
+const mainRouter = Router();
+/**
+ * Add new routers to the mainRouter
+ */
+mainRouter.use("/users", usersRouter);
 
-app.get("/status", (req, res) => {
-  logger.info("usersRouter");
+app.use("/api", mainRouter);
+
+app.get("/api/status", (req, res) => {
   res.json({ status: "OK" });
 });
 

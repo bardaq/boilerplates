@@ -10,7 +10,7 @@
     "start": "node dist/index.js",
     "start:dev": "nodemon",
     "watch-ts": "tsc -w",
-    "test": "yarn jest",
+    "test": "yarn jest --verbose",
     "watch-test": "yarn jest -- --watchAll",
     "clean": "rimraf node_modules yarn.lock dist"
   },
