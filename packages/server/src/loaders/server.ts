@@ -2,18 +2,18 @@ import expess, { Router } from "express";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
-import usersRouter from "./users";
+import usersRouter from "@/users";
 
-const app = expess();
+const server = expess();
 
-app.use(expess.json());
-app.use(expess.urlencoded({ extended: true }));
-app.use(cookieParser());
+server.use(expess.json());
+server.use(expess.urlencoded({ extended: true }));
+server.use(cookieParser());
 
 if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
+  server.use(morgan("dev"));
 } else if (process.env.NODE_ENV === "production") {
-  app.use(helmet());
+  server.use(helmet());
 }
 
 const mainRouter = Router();
@@ -22,10 +22,10 @@ const mainRouter = Router();
  */
 mainRouter.use("/users", usersRouter);
 
-app.use("/api", mainRouter);
+server.use("/api", mainRouter);
 
-app.get("/api/status", (req, res) => {
+server.get("/api/status", (req, res) => {
   res.json({ status: "OK" });
 });
 
-export default app;
+export default server;

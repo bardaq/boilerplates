@@ -1,6 +1,6 @@
 import "./config";
 
-import server from "./app";
+import server from "@/loaders/server";
 import logger from "@/common/logger";
 
 const port = process.env.PORT || 3000;

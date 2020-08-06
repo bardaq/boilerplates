@@ -29,6 +29,13 @@ usersRouter.get(
   userController.getById
 );
 
+usersRouter.put(
+  "/",
+  [validateBodyId, validateBodyEmail, validateBodyPhone],
+  handleValidationErrorsMiddlware,
+  userController.update
+);
+
 usersRouter.patch(
   "/",
   [validateBodyId, validateBodyEmailOptional, validateBodyPhoneOptional],

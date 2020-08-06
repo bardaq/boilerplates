@@ -1,8 +1,8 @@
 import { body, param } from "express-validator";
 
-export const validateParamId = param("id").exists().bail().isLength({ min: 6 });
+export const validateParamId = param("id").exists();
 
-export const validateBodyId = body("id").exists().bail().isLength({ min: 6 });
+export const validateBodyId = body("id").exists();
 
 export const validateBodyEmail = body("email").isEmail();
 

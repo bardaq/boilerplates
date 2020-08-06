@@ -1,36 +1,27 @@
 import "../config";
 import supertest, { Response, SuperTest, Test } from "supertest";
+import uniqueId from "lodash/uniqueId";
 
-import server from "@/app";
+import server from "@/loaders/server";
 import logger from "@/common/logger";
 import { IUser } from "./users.interfaces";
 import User from "./users.entity";
-import mock from "./user.mock";
 import { sanitizePhone } from "./users.validation";
 
 let agent: SuperTest<Test>;
+const uid = uniqueId();
+const testPayload = {
+  id: undefined,
+  phone: `+38(067)319-00-${uid}`,
+  email: `test-${uid}@icloud.com`,
+};
 
 describe("User routes", () => {
   const usersEndpoint = "/api/users/";
   beforeAll((done) => {
+    logger.debug(`env: ${process.env}`);
     agent = supertest.agent(server);
     done();
-  });
-
-  describe(`GET:${usersEndpoint}`, () => {
-    it("should return a JSON with all users and status 200", async (done) => {
-      agent
-        .get(usersEndpoint)
-        .expect(200)
-        .expect("Content-Type", /json/)
-        .end((err: Error, res: Response) => {
-          if (err) logger.error(err);
-          const returnedUser = res.body.users.map((u: IUser) => new User(u));
-          expect(res.body.error).toBeUndefined();
-          expect(returnedUser).toEqual(mock);
-          done();
-        });
-    });
   });
 
   describe(`POST:${usersEndpoint}`, () => {
@@ -39,8 +30,8 @@ describe("User routes", () => {
         .post(usersEndpoint)
         .type("form")
         .send({
+          ...testPayload,
           phone: "+38(067) broken phone 319-00-32",
-          email: "test2@icloud.com",
         })
         .expect(400)
         .expect("Content-Type", /json/)
@@ -58,7 +49,7 @@ describe("User routes", () => {
       agent
         .post(usersEndpoint)
         .type("form")
-        .send({ email: "test2@icloud.com" })
+        .send({ ...testPayload, phone: undefined })
         .expect(400)
         .expect("Content-Type", /json/)
         .end((err: Error, res: Response) => {
@@ -76,7 +67,7 @@ describe("User routes", () => {
         .post(usersEndpoint)
         .type("form")
         .send({
-          phone: "+38(067)319-00-32",
+          ...testPayload,
           email: "email@alert('not an email');",
         })
         .expect(400)
@@ -95,39 +86,41 @@ describe("User routes", () => {
       agent
         .post(usersEndpoint)
         .type("form")
-        .send({
-          phone: "+38(067) 319-00-32",
-          email: "test2@icloud.com",
-        })
+        .send(testPayload)
         .expect(201)
         .expect("Content-Type", /json/)
         .end((err: Error, res: Response) => {
           if (err) logger.error(err);
           expect(res.body.error).toBeUndefined();
-          expect(res.body.id).toHaveLength(16);
+          expect(res.body.id).not.toBeUndefined();
+          testPayload.id = res.body.id;
+          done();
+        });
+    });
+  });
+
+  describe(`GET:${usersEndpoint}`, () => {
+    it("should return a JSON with all users and status 200", async (done) => {
+      agent
+        .get(usersEndpoint)
+        .expect(200)
+        .expect("Content-Type", /json/)
+        .end((err: Error, res: Response) => {
+          if (err) logger.error(err);
+          expect(res.body.error).toBeUndefined();
+          res.body.users.map((u: IUser) => {
+            const newUser = new User(u);
+            expect(newUser).toBeInstanceOf(User);
+          });
           done();
         });
     });
   });
 
   describe(`GET:${usersEndpoint}:id`, () => {
-    it("should return an error message status 400", async (done) => {
-      agent
-        .get(`${usersEndpoint}/1`)
-        .expect(400)
-        .expect("Content-Type", /json/)
-        .end((err: Error, res: Response) => {
-          if (err) logger.error(err);
-          expect(Array.isArray(res.body.error)).toBe(true);
-          expect(res.body.error[0].msg).toBe("Invalid value");
-          expect(res.body.error[0].param).toBe("id");
-          expect(res.body.error[0].location).toBe("params");
-          done();
-        });
-    });
     it("should return a JSON with a NULL users and status 200", async (done) => {
       agent
-        .get(`${usersEndpoint}/123456`)
+        .get(`${usersEndpoint}/999999`)
         .expect(200)
         .expect("Content-Type", /json/)
         .end((err: Error, res: Response) => {
@@ -140,7 +133,7 @@ describe("User routes", () => {
     });
     it("should return a JSON with a users and status 200", async (done) => {
       agent
-        .get(`${usersEndpoint}/0000000000001`)
+        .get(`${usersEndpoint}/${testPayload.id || 1}`)
         .expect(200)
         .expect("Content-Type", /json/)
         .end((err: Error, res: Response) => {
@@ -153,37 +146,12 @@ describe("User routes", () => {
     });
   });
 
-  describe(`PATCH:${usersEndpoint}`, () => {
-    it("should validate the ID an return an error", async (done) => {
-      agent
-        .patch(usersEndpoint)
-        .type("form")
-        .send({
-          id: "1",
-          phone: "+38(067)319-00-39",
-          email: "test2@icloud.com",
-        })
-        .expect(400)
-        .expect("Content-Type", /json/)
-        .end((err: Error, res: Response) => {
-          if (err) logger.error(err);
-          expect(Array.isArray(res.body.error)).toBe(true);
-          expect(res.body.error[0].msg).toBe("Invalid value");
-          expect(res.body.error[0].param).toBe("id");
-          expect(res.body.error[0].location).toBe("body");
-          done();
-        });
-    });
-
+  describe(`PUT:${usersEndpoint}`, () => {
     it("should validate the phone an return an error", async (done) => {
       agent
-        .patch(usersEndpoint)
+        .put(usersEndpoint)
         .type("form")
-        .send({
-          id: "0000000000001",
-          phone: "+38(067) broken phone 319-00-32",
-          email: "test2@icloud.com",
-        })
+        .send({ ...testPayload, phone: "+38(067) broken phone 319-00-32" })
         .expect(400)
         .expect("Content-Type", /json/)
         .end((err: Error, res: Response) => {
@@ -198,9 +166,9 @@ describe("User routes", () => {
 
     it("should return an error that ID is required", async (done) => {
       agent
-        .patch(usersEndpoint)
+        .put(usersEndpoint)
         .type("form")
-        .send({ email: "test2@icloud.com" })
+        .send({ ...testPayload, id: undefined })
         .expect(400)
         .expect("Content-Type", /json/)
         .end((err: Error, res: Response) => {
@@ -215,13 +183,9 @@ describe("User routes", () => {
 
     it("should validate email an return an error", async (done) => {
       agent
-        .patch(usersEndpoint)
+        .put(usersEndpoint)
         .type("form")
-        .send({
-          id: "0000000000001",
-          phone: "+38(067)319-00-32",
-          email: "email@alert('not an email');",
-        })
+        .send({ ...testPayload, email: "email@alert('not an email');" })
         .expect(400)
         .expect("Content-Type", /json/)
         .end((err: Error, res: Response) => {
@@ -235,15 +199,11 @@ describe("User routes", () => {
     });
 
     it("should return a JSON with id and status 200", async (done) => {
-      const payload = {
-        id: "0000000000001",
-        phone: "+38(067) 319-00-39",
-        email: "testPatch@icloud.com",
-      };
+      const newPhone = testPayload.phone.replace(uid, uid + 1);
       agent
-        .patch(usersEndpoint)
+        .put(usersEndpoint)
         .type("form")
-        .send(payload)
+        .send({ ...testPayload, phone: newPhone })
         .expect(200)
         .expect("Content-Type", /json/)
         .end((err: Error, res: Response) => {
@@ -251,8 +211,8 @@ describe("User routes", () => {
           expect(res.body.error).toBeUndefined();
           expect(res.body.user).not.toBeUndefined();
           expect(res.body.user).toEqual({
-            ...payload,
-            phone: sanitizePhone(payload.phone),
+            ...testPayload,
+            phone: sanitizePhone(newPhone),
           });
           done();
         });
@@ -260,23 +220,9 @@ describe("User routes", () => {
   });
 
   describe(`DELETE:${usersEndpoint}:id`, () => {
-    it("should return an error message status 400", async (done) => {
+    it("should return a status 200", async (done) => {
       agent
-        .get(`${usersEndpoint}/1`)
-        .expect(400)
-        .expect("Content-Type", /json/)
-        .end((err: Error, res: Response) => {
-          if (err) logger.error(err);
-          expect(Array.isArray(res.body.error)).toBe(true);
-          expect(res.body.error[0].msg).toBe("Invalid value");
-          expect(res.body.error[0].param).toBe("id");
-          expect(res.body.error[0].location).toBe("params");
-          done();
-        });
-    });
-    it("should return a JSON with a users and status 200", async (done) => {
-      agent
-        .get(`${usersEndpoint}/0000000000001`)
+        .delete(`${usersEndpoint}/${testPayload.id || 1}`)
         .expect(200)
         .expect("Content-Type", /json/)
         .end((err: Error) => {

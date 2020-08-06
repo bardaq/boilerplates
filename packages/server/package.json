@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@monorepo/shared": "^1.0.0",
+    "@types/pg": "^7.14.4",
     "command-line-args": "^5.1.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
@@ -24,6 +25,7 @@
     "helmet": "^3.23.3",
     "module-alias": "^2.2.2",
     "morgan": "^1.10.0",
+    "pg": "^8.3.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {
