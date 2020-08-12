@@ -1,8 +1,0 @@
-CREATE TABLE IF NOT EXISTS users (
-  id SERIAL PRIMARY KEY,
-  email VARCHAR(100) NOT NULL UNIQUE,
-  phone VARCHAR(50) NOT NULL UNIQUE
-);
-
-INSERT INTO users (email, phone)
-VALUES ('admin@email.com', '380673180093');

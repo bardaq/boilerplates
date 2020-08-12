@@ -1,4 +1,3 @@
-import fs from "fs";
 import { Pool } from "pg";
 import logger from "@/common/logger";
 
@@ -12,11 +11,22 @@ const pool = new Pool({
   ssl: isProduction,
 });
 
-const initDataBaseQuery = fs.readFileSync(`${__dirname}/init.sql`).toString();
+pool
+  .query(
+    `
+      CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        email VARCHAR(100) NOT NULL UNIQUE,
+        phone VARCHAR(50) NOT NULL UNIQUE
+      );
 
-pool.query(initDataBaseQuery).catch((e) => {
-  if (e.code !== "23505") logger.error(e);
-});
+      INSERT INTO users (email, phone)
+      VALUES ('admin@email.com', '380673180093');
+  `
+  )
+  .catch((e) => {
+    if (e.code !== "23505") logger.error(e);
+  });
 
 logger.info("Postgres initialized\n");
 
