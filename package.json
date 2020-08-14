@@ -7,14 +7,22 @@
   "author": "Dmitry Klymenko",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "root": true,
+  "workspaces": {
+    "packages": [
+      "packages/**"
+    ],
+    "nohoist": [
+      "**/react-scripts",
+      "**/react-scripts/**"
+    ]
+  },
   "scripts": {
     "start": "lerna run start --parallel",
+    "start:client": "lerna run start:dev --scope @monorepo/client --stream --parallel",
     "start:dev": "lerna run start:dev --stream --parallel",
     "clean": "lerna run clean && rimraf node_modules yarn.lock",
-    "bootstrap": "yarn && lerna bootstrap && yarn build:dev",
+    "bootstrap": "yarn && lerna yarn && yarn build:dev",
     "build": "lerna run build",
     "build:dev": "lerna run build:dev",
     "test": "lerna run test"
