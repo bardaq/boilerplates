@@ -4,9 +4,9 @@ import { FETCH_USERS, FetchUsersSucccess } from "./users.actions";
 import * as API from "./users.api";
 
 function* onFetchUser() {
-  const users = yield API.fetchUsers();
-  if (users.error) {
-    alert(users.error.message);
+  const { users, error } = yield API.fetchUsers();
+  if (error) {
+    alert(error.message);
     // put error to the redux
   }
   yield put(FetchUsersSucccess(users));

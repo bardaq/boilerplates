@@ -7,7 +7,7 @@ export type ApiError = {
 
 export default class FetchAPI {
   static DELETE = (endpoint: string) =>
-    fetch(`${process.env.BACKEND_URL}/${endpoint}`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/${endpoint}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -18,7 +18,7 @@ export default class FetchAPI {
       .catch(FetchAPI.errorHandler);
 
   static GET = (endpoint: string) =>
-    fetch(`${process.env.BACKEND_URL}/${endpoint}`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/${endpoint}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -29,7 +29,7 @@ export default class FetchAPI {
       .catch(FetchAPI.errorHandler);
 
   static POST = (endpoint: string, data: unknown) =>
-    fetch(`${process.env.BACKEND_URL}/${endpoint}`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/${endpoint}`, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",

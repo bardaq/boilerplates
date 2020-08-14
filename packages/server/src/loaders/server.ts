@@ -1,4 +1,5 @@
 import expess, { Router } from "express";
+import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
@@ -6,6 +7,7 @@ import usersRouter from "@/users";
 
 const server = expess();
 
+server.use(cors());
 server.use(expess.json());
 server.use(expess.urlencoded({ extended: true }));
 server.use(cookieParser());
