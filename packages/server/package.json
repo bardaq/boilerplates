@@ -8,7 +8,7 @@
     "build": "rimraf dist && tsc --build tsconfig.prod.json",
     "build:dev": "rimraf dist && tsc --build tsconfig.json",
     "start": "node dist/index.js",
-    "start:dev": "nodemon",
+    "dev": "nodemon",
     "watch-ts": "tsc -w",
     "test": "yarn jest --verbose",
     "watch-test": "yarn jest -- --watchAll",

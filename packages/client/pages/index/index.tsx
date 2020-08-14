@@ -1,7 +1,17 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+
+import { fetchUsers } from "@/entities/users";
+import styles from "./styles.module.css";
 
 export default function Home() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>

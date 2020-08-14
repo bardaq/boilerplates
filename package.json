@@ -19,8 +19,7 @@
   },
   "scripts": {
     "start": "lerna run start --parallel",
-    "start:client": "lerna run start:dev --scope @monorepo/client --stream --parallel",
-    "start:dev": "lerna run start:dev --stream --parallel",
+    "dev": "lerna run dev --stream --parallel",
     "clean": "lerna run clean && rimraf node_modules yarn.lock",
     "bootstrap": "yarn && lerna yarn && yarn build:dev",
     "build": "lerna run build",

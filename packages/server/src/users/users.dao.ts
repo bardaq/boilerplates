@@ -1,4 +1,4 @@
-import { IUser } from "./users.interfaces";
+import { IUser } from "@monorepo/shared/lib";
 import db from "@/loaders/db";
 
 export interface IUserDao {

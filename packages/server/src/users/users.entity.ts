@@ -1,4 +1,4 @@
-import { IUser } from "./users.interfaces";
+import { IUser } from "@monorepo/shared/lib";
 
 class User implements IUser {
   public id: string;
